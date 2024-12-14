@@ -5,6 +5,8 @@ from langchain_community.document_loaders import JSONLoader
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.docstore.document import Document
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 
 def load_json_documents(file_path: str) -> List[Document]:
     """
@@ -34,6 +36,43 @@ def load_json_documents(file_path: str) -> List[Document]:
         documents.append(doc)
     
     return documents
+
+def chunk_documents(documents: List[Document], chunk_size: int = 1000, chunk_overlap: int = 200) -> List[Document]:
+    """
+    Split documents into smaller chunks for more granular embedding.
+    
+    :param documents: List of original Langchain Documents
+    :param chunk_size: Maximum number of characters in each chunk
+    :param chunk_overlap: Number of characters to overlap between chunks
+    :return: List of chunked documents
+    """
+    # Create a text splitter
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        length_function=len,
+        is_separator_regex=False,
+        add_start_index=True
+    )
+    
+    # Split documents
+    chunked_documents = []
+    for doc in documents:
+        # Create chunks while preserving original metadata
+        chunks = text_splitter.split_text(doc.page_content)
+        
+        # Create new documents for each chunk
+        for i, chunk in enumerate(chunks):
+            # Create a copy of metadata for each chunk
+            chunk_metadata = doc.metadata.copy()
+            # Add chunk-specific metadata
+            chunk_metadata['chunk_id'] = i
+            chunk_metadata['original_doc_url'] = chunk_metadata.get('url', '')
+            
+            chunked_doc = Document(page_content=chunk, metadata=chunk_metadata)
+            chunked_documents.append(chunked_doc)
+    
+    return chunked_documents
 
 def create_faiss_index(documents: List[Document], embedding_model: str, persist_directory: str):
     """
@@ -70,15 +109,27 @@ def main():
     EMBEDDING_MODEL = 'llama3'  # Example Ollama embedding model
     INDEX_NAME = ""
     PERSIST_DIRECTORY = './faiss_index'
+
+    CHUNK_SIZE = 1000  # Maximum characters per chunk
+    CHUNK_OVERLAP = 200
     
     # Ensure persist directory exists
     os.makedirs(PERSIST_DIRECTORY, exist_ok=True)
     
     # Load documents from JSON
-    documents = load_json_documents(JSON_FILE_PATH)
+    original_documents = load_json_documents(JSON_FILE_PATH)
 
+    chunked_documents = chunk_documents(
+        original_documents, 
+        chunk_size=CHUNK_SIZE, 
+        chunk_overlap=CHUNK_OVERLAP
+    )
+
+    for doc in chunked_documents:
+        print(doc)
+    exit(0)
     # Create and persist FAISS index
-    vectorstore = create_faiss_index(documents, EMBEDDING_MODEL, PERSIST_DIRECTORY)
+    vectorstore = create_faiss_index(chunked_documents, EMBEDDING_MODEL, PERSIST_DIRECTORY)
     
     # Optional: Demonstrate retrieval
     query = "Your search query here"
