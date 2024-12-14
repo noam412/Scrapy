@@ -74,7 +74,7 @@ def chunk_documents(documents: List[Document], chunk_size: int = 1000, chunk_ove
     
     return chunked_documents
 
-def create_faiss_index(documents: List[Document], embedding_model: str, persist_directory: str):
+def create_faiss_index(documents: List[Document], embedding_model: OllamaEmbeddings, persist_directory: str):
     """
     Create a FAISS vector store from documents and persist it locally.
     
@@ -82,11 +82,9 @@ def create_faiss_index(documents: List[Document], embedding_model: str, persist_
     :param embedding_model: Ollama embedding model to use
     :param persist_directory: Directory to save the FAISS index
     """
-    # Create Ollama embeddings
-    embeddings = OllamaEmbeddings(model=embedding_model)
     
     # Create FAISS vector store
-    vectorstore = FAISS.from_documents(documents, embeddings)
+    vectorstore = FAISS.from_documents(documents, embedding_model)
     
     # Persist the index locally
     vectorstore.save_local(persist_directory)
@@ -94,10 +92,9 @@ def create_faiss_index(documents: List[Document], embedding_model: str, persist_
     
     return vectorstore
 
-def search_faiss_socuments(query: str, index: str, embedding_model: str) -> List[Document]:
-    embeddings = OllamaEmbeddings(model=embedding_model)
+def search_faiss_socuments(query: str, index: str, embedding_model: OllamaEmbeddings) -> List[Document]:
     vector_store = FAISS.load_local(
-        index, embeddings, allow_dangerous_deserialization=True
+        index, embedding_model, allow_dangerous_deserialization=True
     )
     docs = vector_store.similarity_search(query)
     return docs
@@ -112,6 +109,8 @@ def main():
 
     CHUNK_SIZE = 1000  # Maximum characters per chunk
     CHUNK_OVERLAP = 200
+
+    embedding_model = OllamaEmbeddings(model=EMBEDDING_MODEL)
     
     # Ensure persist directory exists
     os.makedirs(PERSIST_DIRECTORY, exist_ok=True)
@@ -129,11 +128,11 @@ def main():
         print(doc)
     exit(0)
     # Create and persist FAISS index
-    vectorstore = create_faiss_index(chunked_documents, EMBEDDING_MODEL, PERSIST_DIRECTORY)
+    vectorstore = create_faiss_index(chunked_documents, embedding_model, PERSIST_DIRECTORY)
     
     # Optional: Demonstrate retrieval
     query = "Your search query here"
-    retrieved_docs = search_faiss_socuments(query,INDEX_NAME, EMBEDDING_MODEL)
+    retrieved_docs = search_faiss_socuments(query,INDEX_NAME, embedding_model)
     
     print("\nRetrieved Documents:")
     for doc in retrieved_docs:
