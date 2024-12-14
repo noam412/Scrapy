@@ -107,8 +107,8 @@ def main():
     # Configuration - replace these with your specific paths and settings
     JSON_FILE_PATH = 'hasolidit_articles.json'
     EMBEDDING_MODEL = 'llama3'  # Example Ollama embedding model
-    INDEX_NAME = ""
-    PERSIST_DIRECTORY = './faiss_index'
+    INDEX_NAME = "hasolidit-index"
+    PERSIST_DIRECTORY = f'./{INDEX_NAME}'
 
     CHUNK_SIZE = 1000  # Maximum characters per chunk
     CHUNK_OVERLAP = 200
@@ -133,7 +133,7 @@ def main():
     
     # Optional: Demonstrate retrieval
     query = "Your search query here"
-    retrieved_docs = search_faiss_socuments(query, "faiss_index", EMBEDDING_MODEL)
+    retrieved_docs = search_faiss_socuments(query,INDEX_NAME, EMBEDDING_MODEL)
     
     print("\nRetrieved Documents:")
     for doc in retrieved_docs:
