@@ -55,10 +55,20 @@ def create_faiss_index(documents: List[Document], embedding_model: str, persist_
     
     return vectorstore
 
+def search_faiss_socuments(query: str, index: str, embedding_model: str) -> List[Document]:
+    embeddings = OllamaEmbeddings(model=embedding_model)
+    vector_store = FAISS.load_local(
+        index, embeddings, allow_dangerous_deserialization=True
+    )
+    docs = vector_store.similarity_search(query)
+    return docs
+
+
 def main():
     # Configuration - replace these with your specific paths and settings
     JSON_FILE_PATH = 'hasolidit_articles.json'
     EMBEDDING_MODEL = 'llama3'  # Example Ollama embedding model
+    INDEX_NAME = ""
     PERSIST_DIRECTORY = './faiss_index'
     
     # Ensure persist directory exists
@@ -72,7 +82,7 @@ def main():
     
     # Optional: Demonstrate retrieval
     query = "Your search query here"
-    retrieved_docs = vectorstore.similarity_search(query, k=3)
+    retrieved_docs = search_faiss_socuments(query, "faiss_index", EMBEDDING_MODEL)
     
     print("\nRetrieved Documents:")
     for doc in retrieved_docs:
