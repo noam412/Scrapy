@@ -43,7 +43,7 @@ class HasoliditSpider(scrapy.Spider):
         category = response.css('a[rel="category tag"]::text').get()
         
         # Extract title from entry header
-        title = response.css('h1.entry-title.entry-title-coverll-empty::text').get()
+        title = response.css('h1.entry-title.entry-title-cover-empty::text').get()
         
         # Extract body content
         body_content = ' '.join(response.css('div.entry-content.clearfix p::text').getall())
