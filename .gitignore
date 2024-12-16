@@ -1,3 +1,8 @@
 .venv/
 
-hasolidit_articles.json
+.env
+
+*faiss_index/*
+
+*hasolidit_articles.json*
+
