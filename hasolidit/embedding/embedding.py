@@ -2,7 +2,6 @@ import json
 import os
 from typing import List, Any
 from dotenv import load_dotenv
-from langchain_community.document_loaders import JSONLoader
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.docstore.document import Document
@@ -112,7 +111,7 @@ def main():
     )
 
     # Create and persist FAISS index
-    vectorstore = create_faiss_index(chunked_documents, embeddings, PERSIST_DIRECTORY)
+    create_faiss_index(chunked_documents, embeddings, PERSIST_DIRECTORY)
 
 if __name__ == "__main__":
     main()
