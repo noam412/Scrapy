@@ -1,13 +1,6 @@
 # Virtual Env
 .venv/
 
-<<<<<<< HEAD
-*.json
-
-*faiss_index*/
-
-logs
-=======
 # Env variable
 .env
 
@@ -18,4 +11,3 @@ logs
 *hasolidit_articles.json*
 *result.json*
 
->>>>>>> b98c76e (Feature/chatgpt model (#2))

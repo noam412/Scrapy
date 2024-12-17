@@ -1,0 +1,53 @@
+[2024-12-15 13:37:57]     INFO |     chat_simple |        setup_logging() | ================================================== CHATBOT INITIALIZATION ==================================================
+[2024-12-15 13:37:57]     INFO |     chat_simple |        setup_logging() | Python Version: 3.11.11 (main, Dec  4 2024, 08:55:08) [GCC 13.2.0]
+[2024-12-15 13:37:57]     INFO |     chat_simple |        setup_logging() | Operating System: linux
+[2024-12-15 13:37:57]     INFO |     chat_simple |        setup_logging() | Log File: logs/chatbot_20241215_133757.log
+[2024-12-15 13:37:57]     INFO |     chat_simple | create_financial_advice_chain() | Initializing OllamaEmbeddings with model: llama3
+[2024-12-15 13:37:57]    DEBUG |         _config |     load_ssl_context() | load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-12-15 13:37:57]    DEBUG |         _config | load_ssl_context_verify() | load_verify_locations cafile='/usr/local/lib/python3.11/dist-packages/certifi/cacert.pem'
+[2024-12-15 13:37:57]    DEBUG |         _config |     load_ssl_context() | load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-12-15 13:37:57]    DEBUG |         _config | load_ssl_context_verify() | load_verify_locations cafile='/usr/local/lib/python3.11/dist-packages/certifi/cacert.pem'
+[2024-12-15 13:37:57]     INFO |     chat_simple | create_financial_advice_chain() | Loading FAISS index from ./faiss_index
+[2024-12-15 13:37:57]    DEBUG |          loader |             <module>() | Environment variable FAISS_OPT_LEVEL is not set, so let's pick the instruction set according to the current CPU
+[2024-12-15 13:37:57]     INFO |          loader |             <module>() | Loading faiss with AVX2 support.
+[2024-12-15 13:37:57]     INFO |          loader |             <module>() | Successfully loaded faiss with AVX2 support.
+[2024-12-15 13:37:57]     INFO |     chat_simple | create_financial_advice_chain() | FAISS Index Statistics:
+[2024-12-15 13:37:57]     INFO |     chat_simple | create_financial_advice_chain() | Total number of vectors: 4036
+[2024-12-15 13:37:57]     INFO |     chat_simple | create_financial_advice_chain() | Initializing ChatOllama with model: llama3
+[2024-12-15 13:37:57]    DEBUG |         _config |     load_ssl_context() | load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-12-15 13:37:57]    DEBUG |         _config | load_ssl_context_verify() | load_verify_locations cafile='/usr/local/lib/python3.11/dist-packages/certifi/cacert.pem'
+[2024-12-15 13:37:57]    DEBUG |         _config |     load_ssl_context() | load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-12-15 13:37:57]    DEBUG |         _config | load_ssl_context_verify() | load_verify_locations cafile='/usr/local/lib/python3.11/dist-packages/certifi/cacert.pem'
+[2024-12-15 13:37:57]     INFO |     chat_simple | create_financial_advice_chain() | Advice chain initialization completed in 0.1689 seconds
+[2024-12-15 13:38:12]     INFO |     chat_simple | generate_response_with_timeout() | Starting response generation for query: אתה יכול לסכם את הכתבה בני 50+? הרכבת עוד בתחנה" בבקשה?
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | connect_tcp.started host='127.0.0.1' port=11434 local_address=None timeout=None socket_options=None
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f917b166610>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_headers.started request=<Request [b'POST']>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_headers.complete
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_body.started request=<Request [b'POST']>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_body.complete
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | receive_response_headers.started request=<Request [b'POST']>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Date', b'Sun, 15 Dec 2024 11:38:12 GMT'), (b'Transfer-Encoding', b'chunked')])
+[2024-12-15 13:38:12]     INFO |         _client | _send_single_request() | HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | receive_response_body.started request=<Request [b'POST']>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | receive_response_body.complete
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | response_closed.started
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | response_closed.complete
+[2024-12-15 13:38:12]  WARNING |     chat_simple |          format_docs() | No documents retrieved for the query
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | connect_tcp.started host='127.0.0.1' port=11434 local_address=None timeout=None socket_options=None
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f91771377d0>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_headers.started request=<Request [b'POST']>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_headers.complete
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_body.started request=<Request [b'POST']>
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | send_request_body.complete
+[2024-12-15 13:38:12]    DEBUG |          _trace |                trace() | receive_response_headers.started request=<Request [b'POST']>
+[2024-12-15 13:38:13]    DEBUG |          _trace |                trace() | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/x-ndjson'), (b'Date', b'Sun, 15 Dec 2024 11:38:13 GMT'), (b'Transfer-Encoding', b'chunked')])
+[2024-12-15 13:38:13]     INFO |         _client | _send_single_request() | HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+[2024-12-15 13:38:13]    DEBUG |          _trace |                trace() | receive_response_body.started request=<Request [b'POST']>
+[2024-12-15 13:38:15]    DEBUG |          _trace |                trace() | receive_response_body.complete
+[2024-12-15 13:38:15]    DEBUG |          _trace |                trace() | response_closed.started
+[2024-12-15 13:38:15]    DEBUG |          _trace |                trace() | response_closed.complete
+[2024-12-15 13:38:15]     INFO |     chat_simple | generate_response_with_timeout() | Response generated successfully in 3.0617 seconds
+[2024-12-15 13:38:15]     INFO |     chat_simple | generate_response_with_timeout() | Response length: 543 characters
+[2024-12-15 13:38:15]     INFO |     chat_simple |                 main() | Total query processing time: 3.0621 seconds
+[2024-12-15 13:38:27]     INFO |     chat_simple |                 main() | Chatbot interrupted by user
