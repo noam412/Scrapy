@@ -5,7 +5,7 @@
 .env
 
 # Faiss DB folders
-*faiss_index/*
+*faiss_index*
 
 # Scrapping Data
 *hasolidit_articles.json*
