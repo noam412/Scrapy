@@ -1,8 +1,13 @@
+# Virtual Env
 .venv/
 
+# Env variable
 .env
 
+# Faiss DB folders
 *faiss_index/*
 
+# Scrapping Data
 *hasolidit_articles.json*
+*result.json*
 
