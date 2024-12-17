@@ -1,7 +1,21 @@
+# Virtual Env
 .venv/
 
+<<<<<<< HEAD
 *.json
 
 *faiss_index*/
 
 logs
+=======
+# Env variable
+.env
+
+# Faiss DB folders
+*faiss_index/*
+
+# Scrapping Data
+*hasolidit_articles.json*
+*result.json*
+
+>>>>>>> b98c76e (Feature/chatgpt model (#2))
